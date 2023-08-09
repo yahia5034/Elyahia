@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- Your HTML code with the <select> element -->
+<select name="selectValue" id="selectValue">
+  <option value="">Select a value</option>
+  <option value="SORL">Sorl </option>
+  <option value="simco">simco</option>
+  <option value="value3">Value 3</option>
+</select>
+<div class="products" id = "products">
+
+</div>
+<!-- Add your JavaScript code -->
+<script>
+  // let products= Array;
+document.addEventListener("DOMContentLoaded", function() {
+
+
+fetchProducts();
+// Fetch all products from PHP using AJAX
+function fetchProducts(){
+  return fetch("searchBack.php").
+    then(response=>response.json()).
+    then(data=>{
+      displayTypes(data);
+      displayProducts(data);
+    return data;
+    });
+}
+
+document.getElementById("selectValue").addEventListener("change", function() {
+  const selectValue = this.value;
+  fetchProducts()
+    .then(products => filterProducts(products, selectValue))
+    .then(filteredProducts => displayProducts(filteredProducts));
+});
+function displayProducts(data){
+  let html ="";
+  html +=`
+  <table class="table" id="dataTable">
+                                    
+    <tr>
+        <th class="text-end">المنشأ</th>
+        <th class="text-end">النوع</th>
+        <th class="text-end">وصف</th>
+        <th class="text-end">بيع</th>
+        <th class="text-end">السعر</th>
+        <th class="text-end">الكمية&nbsp;</th>
+        <th class="text-end">الاسم&nbsp;</th>
+        <th class="text-end">الرقم&nbsp;</th>
+    </tr>
+                                    
+    `;
+  for(let i= 0;i < data.length;i++){
+  html+=` 
+        <tr>
+            <td>`+  data[i]['madein']   +`</td>
+            <td>`+  data[i]['type_name']   +`</td>
+            <td>`+  data[i]['property']    +`</td>
+            <td>`+  data[i]['sellprice']   +`</td>
+            <td>`+  data[i]['price']       +`</td>
+            <td>`+  data[i]['quantity']    +`</td>
+            <td>`+  data[i]['pname']       +`</td>
+            <td>`+  data[i]['sku']         +`</td>
+        </tr>   
+           `;
+  }
+  
+  let d = document.getElementById("products");
+  html+="</table>"
+  d.innerHTML=html;
+}
+
+function displayTypes(data){
+  let selectHtml="";
+  let s = document.getElementById("selectValue");
+  selectHtml +=  `<select name="selectValue" id="selectValue">`;
+    for(let i= 0;i < data.length;i++){
+      selectHtml +=`
+      <option value="`+ data[i].type_name +`"> `+data[i].type_name +`</option>
+      `;
+    }
+  selectHtml +=`</select>`;
+  s.innerHTML=selectHtml;
+}
+// // Function to filter the products based on the selected value
+function filterProducts(products, selectValue) {
+  return products.filter(product => product.type_name == selectValue);
+}
+fetchProducts().then(products=>console.log(products));
+// // Function to display the filtered products
+// function displayProducts(products) {
+//   // Implement your logic to display the filtered products on the webpage
+//   // For example, you can create HTML elements to display the product information.
+//   // You can update a product list container or replace the existing products on the page.
+  
+//   console.log(fetchProducts(products));
+  
+//   // products.forEach(element => {
+//   //   '<h3>'+element.name+'</h3>'
+//   // });
+//   let d = document.getElementById("products");
+//   d.innerHTML=products;
+// }
+
+// // Handle the change event of the select element
+
+// displayProducts(fetchProducts());
+
+});
+
+</script>
+
+</body>
+</html>
