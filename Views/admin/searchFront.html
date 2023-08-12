@@ -33,7 +33,7 @@ function fetchProducts(){
     return data;
     });
 }
-
+fetchProducts().then(data=>console.log())
 document.getElementById("selectValue").addEventListener("change", function() {
   const selectValue = this.value;
   fetchProducts()
@@ -93,7 +93,7 @@ function displayTypes(data){
 function filterProducts(products, selectValue) {
   return products.filter(product => product.type_name == selectValue);
 }
-fetchProducts().then(products=>console.log(products));
+// fetchProducts().then(products=>console.log(products));
 // // Function to display the filtered products
 // function displayProducts(products) {
 //   // Implement your logic to display the filtered products on the webpage

@@ -45,15 +45,20 @@ if(isset($_POST['search'])){
                                 </select>
                                 </div>
                                 <div class="col-md-6" >
-                                <form action="" method="post">
+                                <!-- <form action="" method="post"> -->
+                                <form >
                                     <div class="row">
                                         
                                         <div class="col-md-2" >
-                                        <button class="btn btn-primary text-center" type="submit" >بحث</button>
+                                        <button 
+                                        class="btn btn-primary text-center" 
+                                        type="submit" 
+                                        onclick="searchProducts(event)" 
+                                        >بحث</button>
                                         </div>
                                         <div class="col-md-10" >
                                             <div class="text-md-end dataTables_filter" id="dataTable_filter">  
-                                            <input type="text" list="browser" class="form-control form-control-sm" aria-controls="dataTable" name="search" id ="search" placeholder="Search">
+                                            <input type="text" list="browser"onkeyup="searchFast()" class="form-control form-control-sm" aria-controls="dataTable" name="search" id ="search" placeholder="Search">
                                             <datalist id="browser">
                                         <?php
                                             foreach($searchproducts as $product){
@@ -64,7 +69,6 @@ if(isset($_POST['search'])){
                                             ?>
                                         </datalist>
                                         </div>
-
                                     </div>                                
                                 </form>
                                         </div>
