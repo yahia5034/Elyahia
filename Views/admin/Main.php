@@ -4,6 +4,9 @@ require_once "../../Controllers/ProductController.php";
 $pd= new ProductController;
 $products=$pd->getAllProducts();
 $searchproducts=$products;
+/* 
+Old way of search using php let's call it A --> anything down with A is related to this
+*/
 if(isset($_POST['search'])){
     $name=$_POST['search'];
     $products=$pd->getProductByName($name);
@@ -22,20 +25,26 @@ if(isset($_POST['search'])){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/mycss.css">
-
 </head>
 <body id="page-top">
     <div id="wrapper">
+    <!-- including the side bar -->
      <?php include "sidebar.html";?>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-            
                 <div class="container-fluid">
                     <br><br>
                     <h3 class="text-end text-dark mb-4" >اليحيا لقطع غيار النقل الثقيل&nbsp;</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-end text-primary m-0 fw-bold">البضاعة</p>
+                            <button 
+                                        class="btn btn-primary text-center" 
+                                        type="submit" 
+                                        onclick="download()"
+                                        >
+                                        تنزيل
+                                        </button>
                         </div>
                         <div class="card-body text-end">
                             <div class="row">
@@ -45,36 +54,41 @@ if(isset($_POST['search'])){
                                 </select>
                                 </div>
                                 <div class="col-md-6" >
+                                    <!-- A -->
                                 <!-- <form action="" method="post"> -->
                                 <form >
                                     <div class="row">
-                                        
+                                        <!-- B: New efficient way using java script more responsive and more functionallity -->
                                         <div class="col-md-2" >
                                         <button 
                                         class="btn btn-primary text-center" 
                                         type="submit" 
-                                        onclick="searchProducts(event)" 
-                                        >بحث</button>
+                                        onclick="searchProducts(event)"
+                                        >
+                                        بحث
+                                        </button>
                                         </div>
                                         <div class="col-md-10" >
                                             <div class="text-md-end dataTables_filter" id="dataTable_filter">  
                                             <input type="text" list="browser"onkeyup="searchFast()" class="form-control form-control-sm" aria-controls="dataTable" name="search" id ="search" placeholder="Search">
                                             <datalist id="browser">
-                                        <?php
-                                            foreach($searchproducts as $product){
-                                            ?>
-                                            <option value = "<?php echo $product['pname'];?>">
-                                            <?php
-                                            }
-                                            ?>
-                                        </datalist>
+                                                <?php
+                                                    foreach($searchproducts as $product){
+                                                ?>
+                                                    <option value = "<?php echo $product['pname'];?>">
+                                                <?php
+                                                    }
+                                                ?>
+                                            </datalist>
                                         </div>
                                     </div>                                
                                 </form>
                                         </div>
                                 </div>
                             </div>
+                            <input type="checkbox" name="checkbox" id ="checkbox" onchange="hidePrice()">اخفاء السعر
                             <div class="table-responsive table mt-2" id="products" role="grid" aria-describedby="dataTable_info">
+                                <!-- A: -->
                                 <!-- <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>

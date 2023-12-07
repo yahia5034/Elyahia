@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
 
     // Set the document information
     $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetAuthor('Your Name');
+    $pdf->SetAuthor('Yahia Mohammed Abdelrahman');
     $pdf->SetTitle('Products Report');
     $pdf->SetSubject('Products Report');
 
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
     $pdf->AddPage();
 
     // Set the font and font size
-    $pdf->SetFont('dejavusans', '', 12);
+    $pdf->SetFont('dejavusans', '', 12) ;
     
     $output.='
     <table class="table" id="dataTable">

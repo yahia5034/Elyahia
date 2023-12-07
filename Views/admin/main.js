@@ -22,7 +22,7 @@ function displayProducts(data){
             <th class="text-end">النوع</th>
             <th class="text-end">وصف</th>
             <th class="text-end">بيع</th>
-            <th class="text-end">السعر</th>
+            <th class="text-end hideable">السعر</th>
             <th class="text-end">الكمية&nbsp;</th>
             <th class="text-end">الاسم&nbsp;</th>
             <th class="text-end">الرقم&nbsp;</th>
@@ -37,7 +37,7 @@ function displayProducts(data){
             <td>`+  data[i]['type_name']   +`</td>
             <td>`+  data[i]['property']    +`</td>
             <td>`+  data[i]['sellprice']   +`</td>
-            <td>`+  data[i]['price']       +`</td>
+            <td class ="hideable">`+  data[i]['price']       +`</td>
             <td>`+  data[i]['quantity']    +`</td>
             <td><a class="btn productsName" style="color: #000000!important" href="EditProduct.php?sku=`+data[i].sku +`  "> `+  data[i]['pname'] +`</a></td>
             <td><a class="btn" style="color: #000000!important" href="EditProduct.php?sku=`+data[i].sku+`"> `+  data[i]['sku']   +`</a></td>
@@ -82,7 +82,7 @@ document.getElementById("selectValue").addEventListener("change", function() {
     .then(filteredProducts => displayProducts(filteredProducts));
 });
 
-// // Function to filter the products based on the selected value
+// // Function to filter the products based on the selected value ex(Vaden, SORL,...etc)
 function filterProducts(products, selectValue) {
   return (selectValue!="ALL")?products.filter(product => product.type_name == selectValue):products;
 }
@@ -135,4 +135,78 @@ searchFast=()=>{
       rows[i].style.display="table-row";
     }
   }
+}
+hidePrice=()=>{
+  let price= document.getElementsByClassName("hideable");
+  let check = document.getElementById("checkbox");
+  if(check.checked){
+  for (let i = 0;i<price.length;i++){
+    price[i].style.display="none"
+  }
+}
+  else{
+    for (let i = 0;i<price.length;i++){
+      price[i].style.display="table-cell"
+    }
+  }
+}
+
+download=()=>{
+  let filteredData = [];
+  let input = document.getElementById("search");
+  let selectValue=document.getElementById("selectValue").value;
+  fetchProducts()
+  .then(data=>{
+    input?
+    printAllProducts(
+      (selectValue!="ALL")?data.filter(product => product.type_name == selectValue):data
+      ):
+    printAllProducts(
+      data.filter(x=>x.pname.includes(input.value))
+      )
+  });
+  console.log("Done");
+}
+function printAllProducts(data) {
+  let printWindow = window.open('', '_blank');
+  printWindow.document.write('<html><head><title>Print All Products</title></head><body>');
+  printWindow.document.write('<h1>All Products</h1>');
+  printWindow.document.write('<table border="1">');
+  printWindow.document.write('<tr><th>المنشأ</th><th>النوع</th><th>وصف</th><th>اجمالي سعر الشراء</th><th>بيع</th><th class="hideable">السعر</th><th>الكمية</th><th>الاسم</th><th>الرقم</th></tr>');
+  let sumOfPrice=0;
+  let sumOfSellPrice=0;
+  let total =0;
+  for (let i = 0; i < data.length; i++) {
+    total=0;
+    total =parseFloat(data[i]['price']) * parseFloat(data[i]['quantity']);
+    printWindow.document.write(`
+    <tr>
+    <td>${data[i]['madein']}</td>
+    <td>${data[i]['type_name']}</td>
+    <td>${data[i]['property']}</td>
+    <td>${total}</td>
+    <td>${data[i]['sellprice']}</td>
+    <td class="hideable">${data[i]['price']}</td>
+    <td>${data[i]['quantity']}</td>
+    <td>${data[i]['pname']}</td>
+    <td>${data[i]['sku']}</td>
+    </tr>
+    `);
+    sumOfPrice+=total;
+    sumOfSellPrice+=parseFloat(data[i]['sellprice']);
+  }
+  printWindow.document.write(`
+    <tr>
+    <td>اجمالي سعر الشراء</td>
+    <td class="hideable">${sumOfPrice}</td>
+    </tr>
+    <tr>
+    <td>اجمالي سعر البيع</td>
+    <td class="hideable">${sumOfSellPrice}</td>
+    </tr>
+  `)
+
+  printWindow.document.write('</table></body></html>');
+  printWindow.document.close();
+  printWindow.print();
 }
