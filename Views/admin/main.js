@@ -151,45 +151,66 @@ hidePrice=()=>{
   }
 }
 
-download=()=>{
+download=(headers,values)=>{
   let filteredData = [];
   let input = document.getElementById("search");
   let selectValue=document.getElementById("selectValue").value;
   fetchProducts()
   .then(data=>{
-    input?
+    input? //if there is a search print with the values of the search 
     printAllProducts(
       (selectValue!="ALL")?data.filter(product => product.type_name == selectValue):data
-      ):
+      ,headers,values): // Else print the value that is selected.
     printAllProducts(
       data.filter(x=>x.pname.includes(input.value))
-      )
+      ,headers,values)
   });
   console.log("Done");
 }
-function printAllProducts(data) {
+function printAllProducts(data,headers,values) {
   let printWindow = window.open('', '_blank');
   printWindow.document.write('<html><head><title>Print All Products</title></head><body>');
   printWindow.document.write('<h1>All Products</h1>');
   printWindow.document.write('<table border="1">');
-  printWindow.document.write('<tr><th>المنشأ</th><th>النوع</th><th>وصف</th><th>اجمالي سعر الشراء</th><th>بيع</th><th class="hideable">السعر</th><th>الكمية</th><th>الاسم</th><th>الرقم</th></tr>');
+  printWindow.document.write(`
+                              <tr>
+                                ${headers.notes?"<th>ملاحظات</th>":""}
+                                ${headers.madein?"<th>المنشأ</th>":""}
+                                ${headers.type_name?"<th>النوع</th>":""}
+                                ${headers.property?"<th>وصف</th>":""}
+                                ${headers.total?"<th>اجمالي سعر الشراء</th>":""}
+                                ${headers.sellprice?"<th>بيع</th>":""}
+                                ${headers.price?`<th class="hideable">السعر</th>`:""}
+                                ${headers.quantity?"<th>الكمية</th>":""}
+                                ${headers.pname?"<th>الاسم</th>":""}
+                                ${headers.sku?"<th>الرقم</th>":""}
+                              </tr>`);
+
   let sumOfPrice=0;
   let sumOfSellPrice=0;
   let total =0;
   for (let i = 0; i < data.length; i++) {
     total=0;
     total =parseFloat(data[i]['price']) * parseFloat(data[i]['quantity']);
+    /*
+    The Following code is as follows:
+    if you want to display the header with empty columns you can do it 
+    if you want to display the values without the header it is not possible 
+    */
     printWindow.document.write(`
     <tr>
-    <td>${data[i]['madein']}</td>
-    <td>${data[i]['type_name']}</td>
-    <td>${data[i]['property']}</td>
-    <td>${total}</td>
-    <td>${data[i]['sellprice']}</td>
-    <td class="hideable">${data[i]['price']}</td>
-    <td>${data[i]['quantity']}</td>
-    <td>${data[i]['pname']}</td>
-    <td>${data[i]['sku']}</td>
+    ${headers.notes?`<td></td>`:""}
+    ${headers.madein?`<td>${values.madein?data[i]['madein']:""}</td>`:""}
+    ${headers.type_name?`<td>${values.type_name?data[i]['type_name']:""}</td>`:""}
+    ${headers.property?`<td>${values.property?data[i]['property']:""}</td>`:""}
+    ${headers.total?`<td>${total}</td>`:""}
+    ${headers.sellprice?`<td>${values.sellprice?data[i]['sellprice']:""}</td>`:""}
+    ${headers.price?`<td class="hideable">${values.price?data[i]['price']:""}</td>`:""}
+    ${headers.quantity?`<td>${values.quantity?data[i]['quantity']:""}</td>`:""}
+    ${headers.pname?`<td>${values.pname?data[i]['pname']:""}</td>`:""}
+    ${headers.sku?`<td>${values.sku?data[i]['sku']:""}</td>`:""}
+    
+    
     </tr>
     `);
     sumOfPrice+=total;
@@ -209,4 +230,28 @@ function printAllProducts(data) {
   printWindow.document.write('</table></body></html>');
   printWindow.document.close();
   printWindow.print();
+}
+test=()=>{
+  let headers={
+    "madein":document.getElementById("madein").checked,
+    "type_name":document.getElementById("type_name").checked,
+    "property":document.getElementById("property").checked,
+    "sellprice":document.getElementById("sellprice").checked,
+    "price":document.getElementById("price").checked,
+    "quantity":document.getElementById("quantity").checked,
+    "pname":document.getElementById("pname").checked,
+    "sku":document.getElementById("sku").checked,
+    "notes":document.getElementById("notes").checked
+  }
+  let values={
+    "madein":document.getElementById("madein_value").checked,
+    "type_name":document.getElementById("type_name_value").checked,
+    "property":document.getElementById("property_value").checked,
+    "sellprice":document.getElementById("sellprice_value").checked,
+    "price":document.getElementById("price_value").checked,
+    "quantity":document.getElementById("quantity_value").checked,
+    "pname":document.getElementById("pname_value").checked,
+    "sku":document.getElementById("sku_value").checked,
+  }
+  download(headers,values); 
 }

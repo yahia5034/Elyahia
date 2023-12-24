@@ -22,9 +22,13 @@ if(isset($_POST['search'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>الرئيسية</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css"> -->
     <link rel="stylesheet" href="assets/mycss.css">
+        <!-- CSS -->
+    <link rel="stylesheet" href="test.css" />
+    <!-- Fontawesome CDN Link -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/> -->
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -38,13 +42,104 @@ if(isset($_POST['search'])){
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-end text-primary m-0 fw-bold">البضاعة</p>
-                            <button 
+                            <!-- <button 
                                         class="btn btn-primary text-center" 
                                         type="submit" 
                                         onclick="download()"
                                         >
                                         تنزيل
-                                        </button>
+                            </button> -->
+                            <section >
+                            <button class="show-modal">تنزيل</button>
+                            <span class="overlay"></span>
+
+                            <div class="modal-box">
+                                <p class="h4">العناوين</p>
+                                <div style="display: flex; flex-direction:row">
+                                    <div>
+                                    <input type="checkbox" id="notes" name="notes" value="notes">
+                                    <label for="notes">ملاحظات</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="madein" name="madein" value="madein">
+                                    <label for="madein">المنشأ</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="type_name" name="type_name" value="type_name">
+                                    <label for="type_name">النوع</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="property" name="property" value="property">
+                                    <label for="property">وصف</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="total" name="total" value="total">
+                                    <label for="total">اجمالي سعر الشراء</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="sellprice" name="sellprice" value="sellprice">
+                                    <label for="sellprice">بيع</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="price" name="price" value="price">
+                                    <label for="price">السعر</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="quantity" name="quantity" value="quantity">
+                                    <label for="quantity">الكمية</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="pname" name="pname" value="pname">
+                                    <label for="pname">الاسم</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="sku" name="sku" value="sku">
+                                    <label for="sku">الرقم</label><br>
+                                    </div>
+                                    
+                                </div>
+                                <p class="h4">القيم في الجدول</p>
+                                <div style="display: flex; flex-direction:row">
+                                    <div>
+                                    <input type="checkbox" id="madein_value" name="madein_value" value="madein">
+                                    <label for="madein_value">المنشأ</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="type_name_value" name="type_name_value" value="type_name">
+                                    <label for="type_name_value">النوع</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="property_value" name="property_value" value="property">
+                                    <label for="property_value">وصف</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="sellprice_value" name="sellprice_value" value="sellprice">
+                                    <label for="sellprice_value">بيع</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="price_value" name="price_value" value="price">
+                                    <label for="price_value">السعر</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="quantity_value" name="quantity_value" value="quantity">
+                                    <label for="quantity_value">الكمية</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="pname_value" name="pname_value" value="pname">
+                                    <label for="pname_value">الاسم</label><br>
+                                    </div>
+                                    <div>
+                                    <input type="checkbox" id="sku_value" name="sku_value" value="sku">
+                                    <label for="sku_value">الرقم</label><br>
+                                    </div>
+                                </div>
+                            
+                                            
+                                <div class="buttons">
+                                <button class="close-btn" onclick="test()">Ok, Close</button>
+                                </div>
+                            </div>
+                            </section>
                         </div>
                         <div class="card-body text-end">
                             <div class="row">
@@ -142,6 +237,22 @@ if(isset($_POST['search'])){
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src= "main.js"></script>
+    <script>
+      const section = document.querySelector("section"),
+        overlay = document.querySelector(".overlay"),
+        showBtn = document.querySelector(".show-modal"),
+        closeBtn = document.querySelector(".close-btn");
+
+      showBtn.addEventListener("click", () => section.classList.add("active"));
+
+      overlay.addEventListener("click", () =>
+        section.classList.remove("active")
+      );
+
+      closeBtn.addEventListener("click", () =>
+        section.classList.remove("active")
+      );
+    </script>
 </body>
 
 </html>
