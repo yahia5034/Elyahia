@@ -52,7 +52,6 @@ if(isset($_POST['search'])){
                             <section >
                             <button class="show-modal">تنزيل</button>
                             <span class="overlay"></span>
-
                             <div class="modal-box">
                                 <p class="h4">العناوين</p>
                                 <div style="display: flex; flex-direction:row">
@@ -140,6 +139,10 @@ if(isset($_POST['search'])){
                                 </div>
                             </div>
                             </section>
+                            <select name="sortBy" id="sortBy" onchange=sortBy()>
+                                <option value="type_name">المنشا</option>
+                                <option value="property" selected>بالوصف</option>
+                            </select>
                         </div>
                         <div class="card-body text-end">
                             <div class="row">

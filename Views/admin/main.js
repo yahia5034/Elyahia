@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
     pdata.products.then(data=>{
       displayProducts(data)
       displayTypes(data)
-    })
+    });
+    sortBy();
 });
 // Fetch all products from PHP using AJAX
 function fetchProducts(){
@@ -275,4 +276,11 @@ test=()=>{
     "sku":document.getElementById("sku_value").checked,
   }
   download(headers,values); 
+}
+sortBy=()=>{
+  value=document.getElementById("sortBy").value;
+  pdata.products.then(products=>{
+    products.sort((a, b) => a[value].localeCompare(b[value]));
+    displayProducts(products);
+  })
 }
