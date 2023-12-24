@@ -57,43 +57,43 @@ if(isset($_POST['search'])){
                                 <p class="h4">العناوين</p>
                                 <div style="display: flex; flex-direction:row">
                                     <div>
-                                    <input type="checkbox" id="notes" name="notes" value="notes">
+                                    <input type="checkbox" id="notes" name="notes" value="notes"><
                                     <label for="notes">ملاحظات</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="madein" name="madein" value="madein">
+                                    <input type="checkbox" id="madein" name="madein" value="madein"><
                                     <label for="madein">المنشأ</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="type_name" name="type_name" value="type_name">
+                                    <input type="checkbox" id="type_name" name="type_name" value="type_name"><
                                     <label for="type_name">النوع</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="property" name="property" value="property">
+                                    <input type="checkbox" id="property" name="property" value="property"><
                                     <label for="property">وصف</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="total" name="total" value="total">
-                                    <label for="total">اجمالي سعر الشراء</label><br>
+                                    <input type="checkbox" id="total" name="total" value="total"><
+                                    <label for="total">اجمالي الاسعار</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="sellprice" name="sellprice" value="sellprice">
+                                    <input type="checkbox" id="sellprice" name="sellprice" value="sellprice"><
                                     <label for="sellprice">بيع</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="price" name="price" value="price">
+                                    <input type="checkbox" id="price" name="price" value="price"><
                                     <label for="price">السعر</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="quantity" name="quantity" value="quantity">
+                                    <input type="checkbox" id="quantity" name="quantity" value="quantity"><
                                     <label for="quantity">الكمية</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="pname" name="pname" value="pname">
+                                    <input type="checkbox" id="pname" name="pname" value="pname"><
                                     <label for="pname">الاسم</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="sku" name="sku" value="sku">
+                                    <input type="checkbox" id="sku" name="sku" value="sku"><
                                     <label for="sku">الرقم</label><br>
                                     </div>
                                     
@@ -101,35 +101,35 @@ if(isset($_POST['search'])){
                                 <p class="h4">القيم في الجدول</p>
                                 <div style="display: flex; flex-direction:row">
                                     <div>
-                                    <input type="checkbox" id="madein_value" name="madein_value" value="madein">
+                                    <input type="checkbox" id="madein_value" name="madein_value" value="madein"><
                                     <label for="madein_value">المنشأ</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="type_name_value" name="type_name_value" value="type_name">
+                                    <input type="checkbox" id="type_name_value" name="type_name_value" value="type_name"><
                                     <label for="type_name_value">النوع</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="property_value" name="property_value" value="property">
+                                    <input type="checkbox" id="property_value" name="property_value" value="property"><
                                     <label for="property_value">وصف</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="sellprice_value" name="sellprice_value" value="sellprice">
+                                    <input type="checkbox" id="sellprice_value" name="sellprice_value" value="sellprice"><
                                     <label for="sellprice_value">بيع</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="price_value" name="price_value" value="price">
+                                    <input type="checkbox" id="price_value" name="price_value" value="price"><
                                     <label for="price_value">السعر</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="quantity_value" name="quantity_value" value="quantity">
+                                    <input type="checkbox" id="quantity_value" name="quantity_value" value="quantity"><
                                     <label for="quantity_value">الكمية</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="pname_value" name="pname_value" value="pname">
+                                    <input type="checkbox" id="pname_value" name="pname_value" value="pname"><
                                     <label for="pname_value">الاسم</label><br>
                                     </div>
                                     <div>
-                                    <input type="checkbox" id="sku_value" name="sku_value" value="sku">
+                                    <input type="checkbox" id="sku_value" name="sku_value" value="sku"><
                                     <label for="sku_value">الرقم</label><br>
                                     </div>
                                 </div>

@@ -1,9 +1,28 @@
+class ProductData{
+  constructor(){
+    this.products=fetch("searchBack.php").
+    then(response=>response.json()).
+    then(data=>data);
+    this.products.then(data=>console.log(data))
+  }
+  getProducts(){
+      return this.products;
+  }
+  setProducts(products){
+      this.products = products;
+  }
+}
 document.addEventListener("DOMContentLoaded", function() {
 
-    fetchProducts().then(data=>{
-      displayTypes(data),
+    // fetchProducts().then(data=>{
+    //   displayTypes(data),
+    //   displayProducts(data)
+    // });
+    pdata= new ProductData();
+    pdata.products.then(data=>{
       displayProducts(data)
-    });
+      displayTypes(data)
+    })
 });
 // Fetch all products from PHP using AJAX
 function fetchProducts(){
@@ -77,7 +96,8 @@ function displayTypes(data){
 
 document.getElementById("selectValue").addEventListener("change", function() {
   const selectValue = this.value;
-  fetchProducts()
+  // fetchProducts()
+  pdata.products
     .then(products => filterProducts(products, selectValue))
     .then(filteredProducts => displayProducts(filteredProducts));
 });
@@ -155,7 +175,8 @@ download=(headers,values)=>{
   let filteredData = [];
   let input = document.getElementById("search");
   let selectValue=document.getElementById("selectValue").value;
-  fetchProducts()
+  // fetchProducts()
+  pdata.products
   .then(data=>{
     input? //if there is a search print with the values of the search 
     printAllProducts(
@@ -209,13 +230,13 @@ function printAllProducts(data,headers,values) {
     ${headers.quantity?`<td>${values.quantity?data[i]['quantity']:""}</td>`:""}
     ${headers.pname?`<td>${values.pname?data[i]['pname']:""}</td>`:""}
     ${headers.sku?`<td>${values.sku?data[i]['sku']:""}</td>`:""}
-    
-    
+    <td>${i+1}</td>
     </tr>
     `);
     sumOfPrice+=total;
     sumOfSellPrice+=parseFloat(data[i]['sellprice']);
   }
+  if(headers.total)
   printWindow.document.write(`
     <tr>
     <td>اجمالي سعر الشراء</td>
