@@ -99,7 +99,8 @@ if (isset($_POST['sku'])|| isset($_GET['sku'])) {
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label float-end" for="type"><strong>النوع الحالي&nbsp;</strong><br>
+                                                        <div class="mb-3">
+                                                            <label class="form-label float-end" for="type"><strong>النوع الحالي&nbsp;</strong><br>
                                                         </label><input class="form-control" type="text" id="type"  name="type" value="<?php echo $currentProduct['type_name']; ?>" readonly>
                                                         </div>
                                                     </div>

@@ -263,7 +263,8 @@ test=()=>{
     "quantity":document.getElementById("quantity").checked,
     "pname":document.getElementById("pname").checked,
     "sku":document.getElementById("sku").checked,
-    "notes":document.getElementById("notes").checked
+    "notes":document.getElementById("notes").checked,
+    "total":document.getElementById("total").checked
   }
   let values={
     "madein":document.getElementById("madein_value").checked,
