@@ -6,6 +6,11 @@ require_once "../../Controllers/ReceiptController.php";
 $pd=new ProductController();
 $rc=new ReceiptController();
 
+require_once "../../Controllers/TypeController.php";
+require_once "../../Models/Type.php";
+$cc=new TypeController;
+$types=$cc->getTypes();
+
 if (isset($_POST['sku'])|| isset($_GET['sku'])) {
     $sku=isset($_GET['sku']) ? $_GET['sku'] : $sku=$_POST['sku'];
     $currentProduct=$pd->getProductBySku($sku);
@@ -94,11 +99,30 @@ if (isset($_POST['sku'])|| isset($_GET['sku'])) {
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="mb-3"><label class="form-label float-end" for="type"><strong>النوع&nbsp;</strong><br>
-                                                    </label><input class="form-control" type="text" id="type"  name="type" value="<?php echo $currentProduct['type_name']; ?>"></div>
+                                                        <div class="mb-3"><label class="form-label float-end" for="type"><strong>النوع الحالي&nbsp;</strong><br>
+                                                        </label><input class="form-control" type="text" id="type"  name="type" value="<?php echo $currentProduct['type_name']; ?>" readonly>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label float-end" for="type">
+                                                                <strong>النوع الجديد&nbsp;</strong><br>
+                                                            </label>
+                                                            <select class ="form-control" name="new_type" id="">
+                                                                <option value=""></option>
+                                                            <?php
+                                                            foreach($types as $type){
+                                                                ?>
+                                                                <option value="<?php echo $type['type_id']?>"><?php echo $type['type_name'];?></option>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm float-start" type="submit">تعديل</button></div>
                                                 </form>
                                         </div>

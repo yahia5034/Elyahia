@@ -14,7 +14,12 @@ if(isset($_POST['sku'])){
     $product->sellprice=$_POST['sellprice'];
     $product->property=$_POST['property'];
     $product->quantity=$_POST['qty'];
-    $product->type=$_POST['type'];
+    // $product->type=$_POST['type'];
+    //update the type 
+    $oldtype=$_POST['type'];
+    $newtype=$_POST['new_type'];
+    $product->type =intval($newtype==""?$oldtype:$newtype);
+
     if($prevsku == $newsku){
         $pd->updateProduct($product,$prevsku);
         header("location: ../EditProduct.php?sku=$newsku");

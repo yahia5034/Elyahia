@@ -95,8 +95,8 @@ if(isset($_GET['state']))
                                                                             <?php
                                                                         }
                                                                         ?>
-                                                                    </select>
-                                                                    </div>
+                                                                        </select>
+                                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>

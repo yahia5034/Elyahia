@@ -160,7 +160,7 @@ class ProductController
          $this->db=new DBController;
          if($this->db->openConnection())
          {
-            $query="UPDATE products SET sku = '$product->sku',pname ='$product->pname', quantity = '$product->quantity', price = '$product->price', property = '$product->property',sellprice = '$product->sellprice'  WHERE products.sku = '$prevsku';";
+            $query="UPDATE products SET sku = '$product->sku',pname ='$product->pname', quantity = '$product->quantity', price = '$product->price', property = '$product->property',sellprice = '$product->sellprice',type = $product->type  WHERE products.sku = '$prevsku';";
             $this->db->setQry($query);
             return $this->db->update();
             $this->db->closeConnection();
