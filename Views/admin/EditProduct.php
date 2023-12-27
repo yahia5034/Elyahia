@@ -100,8 +100,11 @@ if (isset($_POST['sku'])|| isset($_GET['sku'])) {
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="mb-3">
-                                                            <label class="form-label float-end" for="type"><strong>النوع الحالي&nbsp;</strong><br>
-                                                        </label><input class="form-control" type="text" id="type"  name="type" value="<?php echo $currentProduct['type_name']; ?>" readonly>
+                                                            <label class="form-label float-end" for="type"><strong> <?php echo $currentProduct['type_name']; ?> النوع الحالي&nbsp;</strong><br>
+                                                        </label><select class="form-control"name="type">
+                                                            <option value="<?php echo $currentProduct['type_id']; ?>"><?php echo $currentProduct['type_name']; ?></option>
+                                                        </select>
+                                                        <!-- <input class="form-control" type="text" id="type"  name="type" value="<?php echo $currentProduct['type_id']; ?>" readonly><?php echo $currentProduct['type_name']; ?> -->
                                                         </div>
                                                     </div>
                                                 </div>

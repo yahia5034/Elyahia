@@ -3,7 +3,7 @@ class ProductData{
     this.products=fetch("searchBack.php").
     then(response=>response.json()).
     then(data=>data);
-    this.products.then(data=>console.log(data))
+    // this.products.then(data=>console.log(data))
   }
   getProducts(){
       return this.products;
@@ -109,7 +109,7 @@ function filterProducts(products, selectValue) {
 }
 
 searchProducts=(e)=>{
-  console.log("clicked");
+  // console.log("clicked");
   e.preventDefault();
   let input = document.getElementById("search");
   // fetchProducts()
@@ -119,7 +119,7 @@ searchProducts=(e)=>{
   //     ));
   let rows=document.getElementsByClassName("h");
   let products= document.getElementsByClassName("productsName");
-  console.log(products[0].innerHTML);
+  // console.log(products[0].innerHTML);
   // console.log(rows);
   for (let i = 0;i<products.length;i++){
     if(!products[i].innerHTML.includes(input.value)){
@@ -147,7 +147,7 @@ searchFast=()=>{
   /*NOrmal way */
   let rows=document.getElementsByClassName("h");
   let products= document.getElementsByClassName("productsName");
-  console.log(products[0].innerHTML);
+  // console.log(products[0].innerHTML);
   // console.log(rows);
   for (let i = 0;i<products.length;i++){
     if(!products[i].innerHTML.includes(input.value)){
@@ -174,20 +174,21 @@ hidePrice=()=>{
 
 download=(headers,values)=>{
   let filteredData = [];
-  let input = document.getElementById("search");
+  let input = document.getElementById("search").value;
   let selectValue=document.getElementById("selectValue").value;
   // fetchProducts()
   pdata.products
   .then(data=>{
-    input? //if there is a search print with the values of the search 
+    input==""? //if there is a search print with the values of the search 
     printAllProducts(
-      (selectValue!="ALL")?data.filter(product => product.type_name == selectValue):data
-      ,headers,values): // Else print the value that is selected.
+      (selectValue!="ALL")?data.filter(product => product.type_name == selectValue):data,
+      headers,
+      values): // Else print the value that is selected.
     printAllProducts(
-      data.filter(x=>x.pname.includes(input.value))
-      ,headers,values)
+      data.filter(x=>x.pname.includes(input))
+      ,headers,
+      values)
   });
-  console.log("Done");
 }
 function printAllProducts(data,headers,values) {
   let printWindow = window.open('', '_blank');
@@ -281,7 +282,15 @@ test=()=>{
 sortBy=()=>{
   value=document.getElementById("sortBy").value;
   pdata.products.then(products=>{
-    products.sort((a, b) => a[value].localeCompare(b[value]));
+    value=="type_name"?
+    products.sort((a, b) => a[value].localeCompare(b[value])):
+    products.sort((a, b) => {
+      const numA = parseFloat(a[value]);
+      const numB = parseFloat(b[value]);
+      // Compare the numeric values
+      return numA - numB;
+    });
+
     displayProducts(products);
   })
 }
