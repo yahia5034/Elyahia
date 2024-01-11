@@ -105,7 +105,11 @@ document.getElementById("selectValue").addEventListener("change", function() {
 
 // // Function to filter the products based on the selected value ex(Vaden, SORL,...etc)
 function filterProducts(products, selectValue) {
-  return (selectValue!="ALL")?products.filter(product => product.type_name == selectValue):products;
+  let filteredProducts= (selectValue!="ALL")?products.filter(product => product.type_name == selectValue):products;
+  filteredProducts.sort(function(a, b) {
+    return a.pname.localeCompare(b.pname, 'ar');
+  });
+  return filteredProducts;
 }
 
 searchProducts=(e)=>{
@@ -254,7 +258,7 @@ function printAllProducts(data,headers,values) {
   printWindow.document.close();
   printWindow.print();
 }
-test=()=>{
+preDownload=()=>{
   let headers={
     "madein":document.getElementById("madein").checked,
     "type_name":document.getElementById("type_name").checked,

@@ -132,16 +132,15 @@ if(isset($_POST['search'])){
                                     <label for="sku_value">الرقم</label><br>
                                     </div>
                                 </div>
-                            
-                                            
                                 <div class="buttons">
-                                <button class="close-btn" onclick="test()">Ok, Close</button>
+                                <button class="close-btn" onclick="preDownload()">Ok, Close</button>
                                 </div>
                             </div>
                             </section>
                             <select name="sortBy" id="sortBy" onchange=sortBy()>
-                                <option value="type_name">المنشا</option>
                                 <option value="property" selected>بالوصف</option>
+                                <option value="type_name">النوع</option>
+                                <!-- <option value="pname" >الاسم</option> -->
                             </select>
                         </div>
                         <div class="card-body text-end">
