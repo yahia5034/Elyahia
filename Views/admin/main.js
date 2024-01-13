@@ -185,7 +185,9 @@ download=(headers,values)=>{
   .then(data=>{
     input==""? //if there is a search print with the values of the search 
     printAllProducts(
-      (selectValue!="ALL")?data.filter(product => product.type_name == selectValue):data,
+      (selectValue!="ALL")?
+      //data.filter(product => product.type_name == selectValue)
+      filterProducts(data, selectValue):data,
       headers,
       values): // Else print the value that is selected.
     printAllProducts(
