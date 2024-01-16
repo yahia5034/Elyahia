@@ -138,7 +138,8 @@ if(isset($_POST['search'])){
                             </div>
                             </section>
                             <select name="sortBy" id="sortBy" onchange=sortBy()>
-                                <option value="property" selected>بالوصف</option>
+                                <option value="default" selected>الاساسي</option>
+                                <option value="property" >بالوصف</option>
                                 <option value="type_name">النوع</option>
                                 <!-- <option value="pname" >الاسم</option> -->
                             </select>

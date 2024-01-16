@@ -43,7 +43,7 @@ class ProductController
          $this->db=new DBController;
          if($this->db->openConnection())
          {
-            $this->db->setQry("SELECT * from products join types on type=type_id ORDER BY property;");
+            $this->db->setQry("SELECT * from products join types on type=type_id ORDER BY type,pname;");
             $result=$this->db->select();
             $this->db->closeConnection();
             return $result;

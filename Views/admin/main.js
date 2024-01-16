@@ -288,8 +288,9 @@ preDownload=()=>{
 sortBy=()=>{
   value=document.getElementById("sortBy").value;
   pdata.products.then(products=>{
-    value=="type_name"?
-    products.sort((a, b) => a[value].localeCompare(b[value])):
+    if(value=="type_name")
+    products.sort((a, b) => a[value].localeCompare(b[value]))
+    else if(value=="property")
     products.sort((a, b) => {
       const numA = parseFloat(a[value]);
       const numB = parseFloat(b[value]);
