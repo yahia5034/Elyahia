@@ -53,7 +53,10 @@ if(isset($_POST['search'])){
                             <button class="show-modal">تنزيل</button>
                             <span class="overlay"></span>
                             <div class="modal-box">
+                                <div style="display:flex;flex-direction:row">
                                 <p class="h4">العناوين</p>
+                                <button type="button" class="btn btn-danger close"><span class="bi bi-x"></span>X</button>                             
+                                </div>
                                 <div style="display: flex; flex-direction:row">
                                     <div>
                                     <input type="checkbox" id="notes" name="notes" value="notes">
@@ -244,6 +247,7 @@ if(isset($_POST['search'])){
       const section = document.querySelector("section"),
         overlay = document.querySelector(".overlay"),
         showBtn = document.querySelector(".show-modal"),
+        close=document.querySelector(".close"),
         closeBtn = document.querySelector(".close-btn");
 
       showBtn.addEventListener("click", () => section.classList.add("active"));
@@ -253,6 +257,9 @@ if(isset($_POST['search'])){
       );
 
       closeBtn.addEventListener("click", () =>
+        section.classList.remove("active")
+      );
+      close.addEventListener("click", () =>
         section.classList.remove("active")
       );
     </script>
