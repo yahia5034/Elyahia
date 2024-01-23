@@ -107,22 +107,25 @@ class ProductController
          }
     }
     
-/*
-   //  public function deleteProduct( $id)
-   //  {
-   //       $this->db=new DBController;
-   //       if($this->db->openConnection())
-   //       {
-   //          $query="delete from products where id = $id";
-   //          return $this->db->delete($query);
-   //       }
-   //       else
-   //       {
-   //          echo "Error in Database Connection";
-   //          return false; 
-   //       }
-   //  }
 
+    public function deleteProduct($Sku)
+    {
+         $this->db=new DBController;
+         if($this->db->openConnection())
+         {
+            $query="delete from products where sku = '$Sku'";
+            $this->db->setQry($query);
+            $result = $this->db->delete($query);
+            $this->db->closeConnection();
+            return $result;
+         }
+         else
+         {
+            echo "Error in Database Connection";
+            return false; 
+         }
+    }
+/*
    //  public function getAllProductsWithImages()
    //  {
    //       $this->db=new DBController;
