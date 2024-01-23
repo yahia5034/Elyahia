@@ -130,7 +130,7 @@ if (isset($_POST['sku'])|| isset($_GET['sku'])) {
                                                 <div class="mb-3"><button class="btn btn-primary btn-sm float-start" type="submit">تعديل</button></div>
                                                 </form>
                                                 <form action="includes/deleteproduct.php" method="post">
-                                                    <input type="text" id="pid" name="pid" value="<?php echo $currentProduct['pid']; ?>" hidden>
+                                                    <input type="text" id="sku" name="sku" value="<?php echo $currentProduct['sku']; ?>" hidden>
                                                     <button class="btn btn-danger">حذف </button>
                                                 </form>
                                         </div>
