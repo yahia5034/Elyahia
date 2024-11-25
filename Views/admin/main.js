@@ -198,8 +198,10 @@ download=(headers,values)=>{
 }
 function printAllProducts(data,headers,values) {
   let printWindow = window.open('', '_blank');
-  printWindow.document.write('<html><head><title>Print All Products</title></head><body>');
-  printWindow.document.write('<h1>All Products</h1>');
+  let title = document.getElementById("selectValue").value;
+  console.log(title)
+  printWindow.document.write(`<html><head><title>${title}</title></head><body>`);
+  printWindow.document.write(`<h1>${title}</h1>`);
   printWindow.document.write('<table border="1">');
   printWindow.document.write(`
                               <tr>

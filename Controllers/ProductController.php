@@ -163,7 +163,7 @@ class ProductController
          $this->db=new DBController;
          if($this->db->openConnection())
          {
-            $query="UPDATE products SET sku = '$product->sku',pname ='$product->pname', quantity = '$product->quantity', price = '$product->price', property = '$product->property',sellprice = '$product->sellprice',type = $product->type  WHERE products.sku = '$prevsku';";
+            $query="UPDATE products SET sku = '$product->sku',pname ='$product->pname', quantity = '$product->quantity', price = ROUND('$product->price',0), property = '$product->property',sellprice = ROUND('$product->sellprice',0), type = $product->type  WHERE products.sku = '$prevsku';";
             $this->db->setQry($query);
             return $this->db->update();
             $this->db->closeConnection();
@@ -206,13 +206,13 @@ class ProductController
             echo "Error in Database Connection";
             return false; 
          }
-    }
+    }//UPDATE products SET products.price = ROUND(products.price,0);
     public function updatePrice($type,$percent)
     {
       $this->db=new DBController;
       if($this->db->openConnection())
       {
-         $query="UPDATE products SET  price = price+(price*$percent) WHERE products.type = '$type';";
+         $query="UPDATE products SET  price = ROUND(price+(price*$percent),0) WHERE products.type = '$type';";
          $this->db->setQry($query);
          $result= $this->db->update();
          $this->db->closeConnection();
@@ -228,7 +228,7 @@ class ProductController
       $this->db=new DBController;
       if($this->db->openConnection())
       {
-         $query="UPDATE products SET  price = price+(price*$percent) ;";
+         $query="UPDATE products SET  price = ROUND(price+(price*$percent),0) ;";
          $this->db->setQry($query);
          $result= $this->db->update();
          $this->db->closeConnection();
@@ -244,8 +244,8 @@ class ProductController
       $this->db=new DBController;
       if($this->db->openConnection())
       {
-         $query="UPDATE products SET  sellprice = price/(1-$percent) WHERE products.type = '$type';";
-         $queryAll ="UPDATE products SET  sellprice = price/(1-$percent);";
+         $query="UPDATE products SET  sellprice = ROUND(price/(1-$percent),0) WHERE products.type = '$type';";
+         $queryAll ="UPDATE products SET  sellprice = ROUND(price/(1-$percent),0);";
          $this->db->setQry($type == "*" ? $queryAll : $query);
          $result= $this->db->update();
          $this->db->closeConnection();
